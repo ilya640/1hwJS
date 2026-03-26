@@ -1,36 +1,36 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ANKETA</title>
 </head>
 <body>
+  
+</body>
 
 <script>
 function runAnketa() {
   let user = "";
 
   function askNonEmpty(message) {
-    let value;
-
     while (true) {
-      value = prompt(message);
+      let value = prompt(message);
 
-      if (value === null) return null;
+      
+      if (value === null) continue;
 
       value = value.trim();
-
       if (value !== "") return value;
     }
   }
 
   function askAge() {
-    let value;
-
     while (true) {
-      value = prompt("Введите ваш возраст");
+      let value = prompt("Введите ваш возраст");
 
-      if (value === null) return null;
+     
+      if (value === null) continue;
 
       value = value.trim();
       const num = Number(value);
@@ -41,43 +41,26 @@ function runAnketa() {
     }
   }
 
-
   const lastName = askNonEmpty("Введите фамилию");
-  if (lastName === null) return;
-
   const firstName = askNonEmpty("Введите имя");
-  if (firstName === null) return;
-
   const middleName = askNonEmpty("Введите отчество");
-  if (middleName === null) return;
 
   user += `ФИО: ${lastName} ${firstName} ${middleName}\n`;
 
- 
   const ageYear = askAge();
-  if (ageYear === null) return;
-
-  user += `возраст: ${ageYear}\n`;
-  user += `возраст в днях: ${ageYear * 365}\n`;
-  user += `через 5 лет: ${ageYear + 5}\n`;
-
+  user += `Возраст: ${ageYear}\n`;
+  user += `Возраст в днях: ${ageYear * 365}\n`;
+  user += `Через 5 лет: ${ageYear + 5}\n`;
 
   const isMale = confirm("Ваш пол - мужской?");
-  user += isMale ? "пол: мужской\n" : "пол: женский\n";
+  user += isMale ? "Пол: мужской\n" : "Пол: женский\n";
 
- 
   const retirementAge = isMale ? 65 : 60;
-
-  user += ageYear >= retirementAge
-    ? "вы на пенсии: да\n"
-    : "вы на пенсии: нет\n";
+  user += ageYear >= retirementAge ? "Вы на пенсии: да\n" : "Вы на пенсии: нет\n";
 
   alert(user);
 }
 
-
 runAnketa();
 </script>
-
-</body>
 </html>

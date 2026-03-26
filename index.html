@@ -1,57 +1,83 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ANKETA</title>
-  </head>
-  <body>
-    <script>
-      let user = '';
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>ANKETA</title>
+</head>
+<body>
 
-      let username = prompt('Введите ваше ФИО');
+<script>
+function runAnketa() {
+  let user = "";
 
-      while (true) {
-        if (username && username.trim() !== '') {
-          user += `ваше ФИО: ${username}\n`;
-          break;
-        } else {
-          username = prompt('Введите корректное ФИО');
-        }
+  function askNonEmpty(message) {
+    let value;
+
+    while (true) {
+      value = prompt(message);
+
+      if (value === null) return null;
+
+      value = value.trim();
+
+      if (value !== "") return value;
+    }
+  }
+
+  function askAge() {
+    let value;
+
+    while (true) {
+      value = prompt("Введите ваш возраст");
+
+      if (value === null) return null;
+
+      value = value.trim();
+      const num = Number(value);
+
+      if (value !== "" && !Number.isNaN(num) && num >= 0 && num <= 200) {
+        return num;
       }
+    }
+  }
 
-      let age = prompt('Введите ваш возраст в годах').trim();
-      let ageYear = Number(age);
 
-      while (true) {
-        if (
-          !Number.isNaN(ageYear) &&
-          ageYear >= 0 &&
-          ageYear <= 200 &&
-          age !== ''
-        ) {
-          user += `ваш возраст в годах: ${ageYear}\n`;
-          user += `ваш возраст в днях: ${ageYear * 365}\n`;
-          user += `через 5 лет вам будет: ${ageYear + 5}\n`;
+  const lastName = askNonEmpty("Введите фамилию");
+  if (lastName === null) return;
 
-          const isMale = confirm('Ваш пол - мужской?');
+  const firstName = askNonEmpty("Введите имя");
+  if (firstName === null) return;
 
-          user += isMale ? 'ваш пол: мужской\n' : 'ваш пол: женский\n';
+  const middleName = askNonEmpty("Введите отчество");
+  if (middleName === null) return;
 
-          const retirementAge = isMale ? 65 : 60;
+  user += `ФИО: ${lastName} ${firstName} ${middleName}\n`;
 
-          user +=
-            ageYear >= retirementAge
-              ? 'вы на пенсии: да\n'
-              : 'вы на пенсии: нет\n';
+ 
+  const ageYear = askAge();
+  if (ageYear === null) return;
 
-          alert(user);
-          break;
-        } else {
-          age = prompt('Введите корректный возраст').trim();
-          ageYear = Number(age);
-        }
-      }
-    </script>
-  </body>
+  user += `возраст: ${ageYear}\n`;
+  user += `возраст в днях: ${ageYear * 365}\n`;
+  user += `через 5 лет: ${ageYear + 5}\n`;
+
+
+  const isMale = confirm("Ваш пол - мужской?");
+  user += isMale ? "пол: мужской\n" : "пол: женский\n";
+
+ 
+  const retirementAge = isMale ? 65 : 60;
+
+  user += ageYear >= retirementAge
+    ? "вы на пенсии: да\n"
+    : "вы на пенсии: нет\n";
+
+  alert(user);
+}
+
+
+runAnketa();
+</script>
+
+</body>
 </html>

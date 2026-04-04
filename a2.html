@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A2</title>
+</head>
+
+<body>
+    <script>
+        const myTrim = (str) => {
+            let start = 0;
+            let end = str.length - 1;
+            let result = '';
+            while (start <= end && str[start] === ' ') {
+                start++;
+            }
+
+            while (start <= end && str[end] === ' ') {
+                end--;
+            }
+            for (start; start <= end; start++) {
+                result += str[start];
+            }
+            return result;
+        };
+
+        let userString = '';
+        while (1) {
+            userString = prompt('Введите строку');
+            if (userString !== null) {
+                break;
+            } else {
+                continue;
+            }
+        }
+
+        alert(`\$${myTrim(userString)}\$`);
+    </script>
+</body>
+
+</html>

@@ -16,13 +16,17 @@
             while (start <= end && str[start] === ' ') {
                 start++;
             }
+            if (start !== end + 1) {
+                while (start <= end && str[end] === ' ') {
+                    end--;
+                }
+            } else {
+                return '';
+            }
 
-            while (start <= end && str[end] === ' ') {
-                end--;
-            }
-            for (start; start <= end; start++) {
-                result += str[start];
-            }
+            start === 0 && end === str.length - 1 ?
+                (result = str) :
+                (result = str.substring(start, end));
             return result;
         };
 
@@ -35,8 +39,16 @@
                 continue;
             }
         }
-
-        alert(`\$${myTrim(userString)}\$`);
+        const resultString = myTrim(userString);
+        if (resultString === '') {
+            alert('Это всё пробелы!');
+        } else {
+            if (resultString === userString) {
+                alert('Строка без пробелов');
+            } else {
+                alert(`Ваша строка: \$${resultString}\$`);
+            }
+        }
     </script>
 </body>
 

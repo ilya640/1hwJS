@@ -16,18 +16,17 @@
             while (start <= end && str[start] === ' ') {
                 start++;
             }
-            if (start !== end + 1) {
-                while (start <= end && str[end] === ' ') {
-                    end--;
-                }
-            } else {
+            if (start === end + 1) {
                 return '';
             }
 
-            start === 0 && end === str.length - 1 ?
-                (result = str) :
-                (result = str.substring(start, end));
-            return result;
+            while (start <= end && str[end] === ' ') {
+                end--;
+            }
+
+            return start === 0 && end === str.length - 1 ?
+                str :
+                str.substring(start, end + 1);
         };
 
         let userString = '';
